@@ -35,9 +35,16 @@
             $searchResults .= '"' . $row["FirstName"] . '"';
         }
 
+        if($searchCOunt == 0){
+            returnWithError("No Records Found");
+            exit();
+        } else {
+            returnWithInfo($searchResults);
+        }
 
-
+        $stmt->close();
+        $conn->close();
     }
 
-
+    
 ?>
