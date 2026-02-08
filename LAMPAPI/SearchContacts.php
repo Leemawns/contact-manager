@@ -7,9 +7,7 @@
     }
 
     $userId = (int)$inData["userId"];
-    $search = $inData["search"];
-    $searchResults = "";
-    $searchCount = 0;
+    $search = trim((string)$inData["search"]);
 
     if($userId <= 0){
         returnWithError("Invalid input.");
@@ -20,54 +18,67 @@
 
     if($conn->connect_error){
         returnWithError($conn->connect_error);
+        exit();
     } 
     else {
-        $stmt = $conn->prepare("select FirstName from Contacts where FirstName like ? and UserID = ?");
-        $contactName = "%" . $search . "%";
-        $stmt->bind_param("si", $contactName, $search);
+
+        $like = "%" . $search . "%";
+
+        $stmt = $conn->prepare("select ID, FirstName, LastName, Phone, Email 
+                                from Contacts where UserID = ? 
+                                    and (FirstName LIKE ? OR LastName LIKE ? OR Phone LIKE ? OR Email LIKE ?) 
+                                order by LastName, FirstName");
+
+        if(!$stmt){
+            returnWithError("Prepare failed: " . $conn->error);
+            $conn->close();
+            exit();
+        }
+
+        $stmt->bind_param("issss", $userId, $like, $like, $like, $like);
         $stmt->execute();
 
         $result = $stmt->get_result();
         
+        $results = [];
         while($row = $result->fetch_assoc()){
-            if($searchCount > 0){
-                $searchResults .= ",";
-            }
-            $searchCount++;
-            $searchResults .= '"' . $row["FirstName"] . '"';
-        }
-
-        if($searchCount == 0){
-            returnWithError("No Records Found");
-            exit();
-        } else {
-            returnWithInfo($searchResults);
+            $results[] = [
+                "contactId" => (int)$row["ID"],
+                "firstName" => $row["FirstName"],
+                "lastName" => $row["LastName"],
+                "phone" => $row["Phone"],
+                "email" => $row["Email"]
+            ];
         }
 
         $stmt->close();
         $conn->close();
+
+        returnWithResults($results);
     }
 
     function getRequestInfo(){
-        return json_decode(file_get_contents('php://input'), true);
+        $data = json_decode(file_get_contents('php://input'), true);
+        if(is_array($data)){
+            return $data;
+        }
+        else{
+            return [];
+        }
     }
 
     function sendResultInfoAsJson($obj){
         header('Content-type: application/json');
-        echo($obj);
+        echo $obj;
     }
 
     function returnWithError($err){
-        $retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
+        $retValue = json_encode(["results" => [], "error" => $err]);
         sendResultInfoAsJson($retValue);
     }
 
-    function returnWithInfo( $searchResults ){
-		$retValue = '{"results":[' . $searchResults . '],"error":""}';
+    function returnWithResults( $results ){
+		$retValue = json_encode(["results" => $results, "error" => ""]);
 		sendResultInfoAsJson( $retValue );
 	}
-
-
-
-
 ?>
