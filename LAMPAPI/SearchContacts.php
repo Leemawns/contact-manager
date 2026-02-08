@@ -22,7 +22,18 @@
         returnWithError($conn->connect_error)
     } 
     else {
-        
+        $stmt = $conn->prepare("select FirstName from Contacts where FirstName like ? and UserID = ?");
+        $contactName = "%" . $search . "%";
+        $stmt->bind_param("ss", $contactName, $search)
+        $stmt->execute();
+
+        while($row = $result->fetch_assoc()){
+            if($searchCount > 0){
+                $searchResults .= ",";
+            }
+            $searchCount++;
+            $searchResults .= '"' . $row["FirstName"] . '"';
+        }
 
 
 
