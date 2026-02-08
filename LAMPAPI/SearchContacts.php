@@ -18,7 +18,15 @@
 
     $conn = new mysqli("localhost", "contact_api", "1JERKApassword", "contact_manager");
 
-    
+    if($conn->connect_error){
+        returnWithError($conn->connect_error)
+    } 
+    else {
+        
+
+
+
+    }
 
 
 ?>
