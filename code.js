@@ -1,4 +1,4 @@
-const urlBase = 'http://COP4331-patel.xyz/LAMPAPI';
+const urlBase = 'http://group15.sedsucf.org';
 const extension = 'php';
 
 let userId = 0;
@@ -207,4 +207,5 @@ function deleteContact()
 {
 
 }
+
 
