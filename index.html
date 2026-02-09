@@ -17,24 +17,39 @@
         <h1 id="subtitle">Inner Circle</h1>
     </div>
     <div id="loginDiv">
-        <input type="text" id="loginName" placeholder="Username" /><br />
-        <input type="password" id="loginPassword" placeholder="Password" /><br />
+        <div class="input-row">
+            <label for="loginName">Username: </label>
+            <input type="text" id="loginName" placeholder="Username" />
+            <div class="error-row" id="usernameError"></div>
+        </div>
+        <div class="input-row">
+            <label for="loginPassword">Password: </label>
+            <input type="password" id="loginPassword" placeholder="Password" />
+            <div class="error-row" id="passwordError"></div>
+        </div>
         
         <div id="registerFields">
-            <input type="password" id="confirmPassword" placeholder="Confirm Password" /><br />
-            <input type="text" id="firstName" placeholder="First Name" /><br />
-            <input type="text" id="lastName" placeholder="Last Name" /><br />
-            <input type="text" id="email" placeholder="Email" /><br />
-            <input type="text" id="phone" placeholder="Phone Number" /><br />
+            <div class="input-row">
+                <label for="confirmPassword">Confirm Password: </label>
+                <input type="password" id="confirmPassword" placeholder="Confirm Password" />
+                <div class="error-row" id="confirmPasswordError"></div>
+            </div>
+            <div class="input-row">
+                <label for="firstName">First Name: </label>
+                <input type="text" id="firstName" placeholder="First Name" />
+                <div class="error-row" id="firstNameError"></div>
+            </div>
+            <div class="input-row">
+                <label for="lastName">Last Name: </label>
+                <input type="text" id="lastName" placeholder="Last Name" />
+                <div class="error-row" id="lastNameError"></div>
+            </div>
         </div>
         
         <button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Login </button>
         <button type="button" id="registerButton" class="buttons" onclick="toggleRegister();"> Register </button>
-        <div id="registerTextBox">
-        <h1 id="registertext">Don't have an account?</h1>
-        </div>
         
-        <span id="loginResult"></span>
+        <div class="error-row" id="loginResult"></div>
     </div>
 
 

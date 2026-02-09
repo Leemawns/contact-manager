@@ -50,34 +50,54 @@ function doRegister()
 	let confirmPassword = document.getElementById("confirmPassword").value;
 	let firstName = document.getElementById("firstName").value;
 	let lastName = document.getElementById("lastName").value;
-	let email = document.getElementById("email").value;
-	let phone = document.getElementById("phone").value;
 	
-	document.getElementById("loginResult").innerHTML = "";
+	// error messages
+	let loginResult = document.getElementById("loginResult");
+	let passwordError = document.getElementById("passwordError");
+	let confirmPasswordError = document.getElementById("confirmPasswordError");
+
+
+	let valid = true;
 	
-	// Validate inputs
-	if (!login || !password || !confirmPassword || !firstName || !lastName || !email) {
-		document.getElementById("loginResult").innerHTML = "Please fill in all required fields";
-		return;
+	// Ensure no empty inputs
+	if (!login || !password || !confirmPassword || !firstName || !lastName) {
+		loginResult.innerHTML = "Please fill in all required fields";
+		valid = false;
 	}
-	
-	if (password !== confirmPassword) {
-		document.getElementById("loginResult").innerHTML = "Passwords do not match";
-		return;
+	else {
+		loginResult.innerHTML = "";
 	}
-	
+
+	// password length check
 	if (password.length < 8) {
-		document.getElementById("loginResult").innerHTML = "Password must be at least 8 characters long";
+		passwordError.innerHTML = "Password must be at least 8 characters long";
+		valid = false;
+	}
+	else {
+		passwordError.innerHTML = "";
+	}
+
+	// password match check
+	if (password != confirmPassword) {
+		confirmPasswordError.innerHTML = "Passwords do not match";
+		valid = false;
+	}
+	else {
+		confirmPasswordError.innerHTML = "";
+	}
+
+	if (!valid) {
+		console.log("invalid input")
 		return;
 	}
 	
+	console.log("valid input.")
+
 	let tmp = {
 		login: login,
 		password: password,
 		firstName: firstName,
-		lastName: lastName,
-		email: email,
-		phone: phone
+		lastName: lastName
 	};
 	let jsonPayload = JSON.stringify(tmp);
 	

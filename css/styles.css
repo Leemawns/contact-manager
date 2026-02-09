@@ -5,11 +5,8 @@ body
     overflow-y: hidden;
     overflow-x: hidden;
 
-    background: linear-gradient(
-        to bottom,
-        white,
-        rgb(211, 209, 209)
-    );
+    background-image: url('/images/beans.jpg');
+    background-size: cover;
 
     font-family: "Montserrat", sans-serif;
 }
@@ -159,14 +156,31 @@ h1
 	font-size: 30px;
 }
 
+.input-row {
+  margin-bottom: 10px;
+}
+
+.input-row label {
+  color: white; 
+  width: 33%;
+  text-align: right;
+  display: inline-block;
+}
+
+.error-row {
+  color: red;
+  text-align: center;
+}
+
+
 input[type="text"],
 input[type="password"] {
-  width: 40%;
-  margin-left: 28%;
-  margin-bottom: 10px;
+  width: 30%;
   height: 40px;
   font-size: 24px;
+  margin-bottom: 10px;
 
+  justify-content: center;
   border-radius: 30px;
   text-align: center;
 
