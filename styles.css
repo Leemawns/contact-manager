@@ -1,0 +1,333 @@
+body 
+{
+    margin: 0;
+    height: 100vh;
+    overflow-y: hidden;
+    overflow-x: hidden;
+
+    background: linear-gradient(
+        to bottom,
+        white,
+        rgb(211, 209, 209)
+    );
+
+    font-family: "Montserrat", sans-serif;
+}
+
+* 
+{
+    color: rgb(4, 60, 4);
+}
+
+#header 
+{
+    margin-top: 30px;
+    text-align: center;
+}
+
+h1
+{
+    margin-top: 4px 0;
+}
+
+
+#brandRow 
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin: 10px;
+}
+
+#logo 
+{
+    width: 500px;
+    height: auto;
+    margin: 0 auto 4px auto;
+}
+
+#title 
+{
+  font-size: 52px;
+  margin: 0px;
+  font-weight: 700;
+  color: rgb(4, 60, 4);
+}
+
+#subtitle 
+{
+  font-size: 28px;
+  margin-top: 6px;
+  font-weight: 600;
+  color: rgb(4, 60, 4);
+  opacity: 0.9;
+}
+
+#registerTextBox
+{
+  width: 40%;
+  margin-left: 28%;
+}
+
+#registertext
+{
+    font-size: 24px;
+    text-align: center;
+    margin-left: 0;      
+    margin-top: 6px;
+    font-weight: 500;
+    color: white;
+    opacity: 0.9;
+}
+
+#loginDiv,
+#register
+#loggedInDiv,
+#accessUIDiv 
+{
+  font-size: 28px;
+  width: 100%;
+  margin-left: 0%;
+  padding: 30px;
+
+  background: rgb(4, 60, 4);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  box-shadow: 0 3px 10px gray;
+  transition: all 0.4s ease;
+}
+
+#registerFields {
+  max-height: 0;
+  overflow: auto;
+  opacity: 0;
+  transition: max-height 1s ease, opacity 0.2s ease;
+}
+
+#registerFields.show {
+  max-height: 1000px;
+  opacity: 1;
+  margin-top: 0;
+}
+
+.buttons {
+  width: 20%;
+
+  margin-left: 38%;
+  margin-bottom: 5px;
+
+  font-size: 26px;
+  border-radius: 40px;
+
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+
+  background: white;
+  color: rgb(4, 60, 4);
+  border: 3px solid rgb(4, 60, 4);
+
+  cursor: pointer;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.buttons:hover 
+{
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.5);
+}
+
+
+
+#loginName
+{
+	font-size: 30px;
+}
+#loginPassword
+{
+	font-size: 30px;
+}
+#searchText
+{
+	font-size: 30px;
+}
+#colorText
+{
+	font-size: 30px;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 40%;
+  margin-left: 28%;
+  margin-bottom: 10px;
+  height: 40px;
+  font-size: 24px;
+
+  border-radius: 30px;
+  text-align: center;
+
+  font-family: "Montserrat", sans-serif;        
+
+  background: rgb(19, 84, 19);
+  border: 2px solid white;
+  color: white;
+}
+
+
+input::placeholder 
+{
+  color: rgba(255,255,255,0.7);
+}
+
+
+
+#inner-title 
+{
+  font-weight: 600;
+  letter-spacing: 0px;
+  opacity: 0.9;
+}
+
+
+.search-button {
+    background-image: url('/images/search.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border-radius: 100px;
+
+    height: 40px;
+    width: 40px;
+    border: 2px, solid black;
+}
+
+.search-button:hover{
+    opacity:50%;
+}
+
+/* Modal Container */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none; /* Hidden by default */
+  background-color: rgba(0,0,0,0.4);
+}
+
+/* Slide up animation */
+@keyframes slideInUp {
+  0% { transform: translateY(100%); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes slideOutDown {
+  0% { transform: translateY(0%); }
+  100% { transform: translateY(100%); }
+}
+
+/* Class to trigger animation */
+.modal.open {
+  display: block;
+  animation: slideInUp 0.5s ease-out;
+}
+
+.modal.close {
+  display: block;
+  animation: slideOutDown 0.5s ease-in forwards;
+}
+
+
+.modal-content {
+  text-align: center;
+  background: rgb(211, 209, 209);
+  padding: 10px;
+  margin: 10% auto;
+  text-align: center;
+  width: 500px;
+  height: 350px
+}
+
+#addContact {
+  border-radius: 25px;
+  background: #4CAF50;
+  color: white;
+  margin-left: 5%;
+  margin-top: 10px;
+  cursor: pointer;
+  width: 75px;
+  height: 40px;
+  font weight: 30px;
+}
+#cancel {
+  border-radius: 25px;
+  background #fff;
+  cursor: pointer;
+  margin-right: 5%;
+  margint-top: 10px;
+  align: left;
+  width: 75px;
+  height: 40px;
+}
+
+#cancel:hover {
+  opacity: 75%;
+}
+
+#logoutButton{
+    width: 11%;
+    margin-left: 10%;
+    float: right;
+    margin-right: 20px;
+}
+
+#modalText {
+    font-size: 30px;
+    text-align: center;
+}
+
+
+input[type="modalText"] {
+  width: 75%;
+  margin-left: 0%;
+  margin-bottom: 10px;
+  height: 40px;
+  font-size: 20px;
+
+  border-radius: 30px;
+  text-align: center;
+
+  font-family: "Montserrat", sans-serif;        
+
+  background: rgb(19, 84, 19);
+  border: 2px solid white;
+  color: white;
+}
+
+#subtext {
+  color: white;
+  font-size: 30px;
+  margin-left: 38.5%;
+}
+
+#smallLogo {
+  width: 200px;
+  height: auto;
+  float: left;
+  margin-top: 10px;
+}
+
+#logTitle {
+  font-size: 52px;
+  margin-top: 20px;
+  text-align: center;
+  font-weight: 700;
+  color: rgb(4,60,4);
+}
+
+
