@@ -74,5 +74,4 @@
         $retValue = '{"error":""}';
         sendResultInfoAsJson($retValue);
     }
-
 ?>
