@@ -1,8 +1,7 @@
 <html>
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title> Pair-of-Dice Coffee Company</title>
+    <title> Pair-A-Dice Coffee Company</title>
     	<script type="text/javascript" src="js/code.js"></script>
     <link href="css/styles.css" rel="stylesheet">	
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
@@ -11,40 +10,117 @@
 	</script>   
 	
 </head>
+
 <body>
 	<img src ="images/logo.png" id="smallLogo"> 
 	<br />
 	<h1	id ="logTitle">Pair-A-Dice Coffee Co. <button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button> 
 	</h1>
 
-	<br />
     <div id="accessUIDiv">
-        <br />
 
         <input type="text" id="searchText" placeholder="Search Name" />
-        <button type="button" id="searchNameButton" class="search-button" onclick="searchName();"></button>
+        <button type="button" id="searchNameButton" class="search-button" onclick="searchContact();"></button>
+        <br />
 		<span id="contactSearchResult"></span>
-        <p id="contactList">
-        </p>
+        <div id="contactTable">
+        </div>
 	</div>
 	<br />
 
 	<div id="accessUIDiv">
 		<h1 id="subtext">Can't Find Them?</h1>
- 		<button type="button" id="openModal" class ="buttons" onclick="openModal()">Add Contact</button>
+ 		<button type="button" id="openModal" class ="buttons" onclick="openAddModal()">Add Contact</button>
     </div>
 	
 </body>
 
-<div id="myModal" class="modal">
-  <div class="modal-content">
-    <h3 id ="modalText">Add Contact</h3>
-	<input type="ModalText" id="firstNameText" placeholder="First Name"/> <br />
-	<input type="ModalText" id="lastNameText" placeholder="Last Name"/> <br />
-	<input type="ModalText" id="emailText" placeholder="Email"/> <br />
-	<input type="ModalText" id="phoneNumber" placeholder="Phone Number"/> <br>
-	<button type="button" id="cancel" onclick="closeModal();"> Cancel </button>
-	<button type="button" id="addContact" onclick="addContact();"> Add </button><br />
-  </div>
+<div id="addModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeAddModal()">&times;</span>
+    
+        <h3 id ="modalText">Add Contact</h3>
+        <span id ="contactAddResult"></span>
+            <div class="modalRow">
+                <label for="firstNameText">First Name:</label>
+                <input type="ModalText" class="modalText" id="firstNameText">
+            </div>
+
+            <div class="modalRow">
+                <label for="lastNameText">Last Name:</label>
+                <input type="ModalText" class="modalText" id="lastNameText">
+            </div>
+
+            <div class="modalRow">
+                <label for="phoneNumber">Phone:</label>
+                <input type="ModalText" class="modalText" id="phoneNumber">
+            </div>
+
+            <div class="modalRow">
+                <label for="emailText">Email:</label>
+                <input type="ModalText" class="modalText" id="emailText">
+            </div>
+	    <button type="button" class="Buttons" id="modalButtons" onclick="closeAddModal();"> Cancel </button>
+	    <button type="button" class="Buttons" id="modalButtons" onclick="contactAdded();"> Add </button><br />
+    </div>
 </div>
+
+<div id="contactModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeContactModal()">&times;</span>
+
+        <h2 id="modalName"></h2>
+        <span id="contactUpdateResult"></span>
+        <br>
+        <div class="modalRow">
+            <label for="modalFirstName">First Name:</label>
+            <input type="ModalText" class="modalText" id="modalFirstName" disabled>
+        </div>
+
+        <div class="modalRow">
+            <label for="modalLastName">Last Name:</label>
+            <input type="ModalText" class="modalText" id="modalLastName" disabled>
+        </div>
+
+        <div class="modalRow">
+            <label for="modalPhone">Phone:</label>
+            <input type="ModalText" class="modalText" id="modalPhone" disabled>
+        </div>
+
+        <div class="modalRow">
+            <label for="modalEmail">Email:</label>
+            <input type="ModalText" class="modalText" id="modalEmail" disabled>
+        </div>
+    
+        <div class="modal-actions">
+            <button type="button" class="Buttons" id="editButton" onclick="enableEdit()">Edit</button> 
+            <button type="button" class="Buttons" id= "cancelButton" onclick="disableEdit()">Cancel</button>
+            <button type="button" class="Buttons" id="saveButton" onclick="saveEdit()">Save</button>
+            <button type="button" class="Buttons" id= "deleteButton" onclick="opendeleteModal()">Delete</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="deleteModal">
+    <div class="modal-content" id="deleteModalContents">
+        <h2 id="modalText">Are you sure you would like to delete this contact?</h2>
+        <span id="contactDeleteResult"></span>
+        <div class="modal-actions">
+            <button type="button" class="buttons" id="modalButtons" onclick="closedeleteModal()">Cancel</button>
+            <button type="button" class="buttons" id="modalButtons" onclick="deleteContact()">Delete</button> <br>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<template id="contactButtonTemplate">
+  <button class="contactButton">
+    <span class="contactName"></span>
+  </button>
+</template>
+
+<div id="contactTable"></div>
+
+
 </html>
