@@ -41,7 +41,7 @@ h1
 
 #logo 
 {
-    width: 500px;
+    width: 250px;
     height: auto;
     margin: 0 auto 4px auto;
 }
@@ -161,7 +161,7 @@ h1
 input[type="text"],
 input[type="password"] {
   width: 40%;
-  margin-left: 25%;
+  margin-left: 28%;
   margin-bottom: 10px;
   height: 40px;
   font-size: 24px;
