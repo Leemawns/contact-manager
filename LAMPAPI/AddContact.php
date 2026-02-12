@@ -1,7 +1,5 @@
 <?php
-
     $inData = getRequestInfo();
-
 
     if(!isset($inData["userId"], $inData["firstName"], $inData["lastName"], $inData["phone"], $inData["email"]))
     {
@@ -74,6 +72,4 @@
         $retValue = '{"contactId":' . $contactId . ',"error":""}';
         sendResultInfoAsJson($retValue);
     }
-
-
 ?>

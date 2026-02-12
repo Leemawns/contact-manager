@@ -1,13 +1,12 @@
-
 <?php
-
 	$inData = getRequestInfo();
 	
 	$id = 0;
 	$firstName = "";
 	$lastName = "";
 
-	$conn = new mysqli("localhost", "contact_api", "1JERKApassword", "contact_manager"); 	
+	$conn = new mysqli("localhost", "contact_api", "1JERKApassword", "contact_manager");
+
 	if( $conn->connect_error )
 	{
 		returnWithError( $conn->connect_error );
@@ -19,7 +18,7 @@
 		$stmt->execute();
 		$result = $stmt->get_result();
 
-		if( $row = $result->fetch_assoc()  )
+		if( $row = $result->fetch_assoc())
 		{
 			returnWithInfo( $row['FirstName'], $row['LastName'], $row['ID'] );
 		}
@@ -54,5 +53,4 @@
 		$retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
 		sendResultInfoAsJson( $retValue );
 	}
-	
 ?>

@@ -1,10 +1,8 @@
-
 <?php
-
 	$inData = getRequestInfo();
 
-    if (!isset($inData["userId"], $inData["contactId"])){
-
+    if (!isset($inData["userId"], $inData["contactId"]))
+	{
         returnWithError("Missing required field(s)");
         exit();
     }
@@ -12,8 +10,8 @@
 	$userId = (int)$inData["userId"];
 	$contactId = (int)($inData["contactId"]);
 
-    if($userId <= 0 || $contactId <= 0){
-
+    if($userId <= 0 || $contactId <= 0)
+	{
         returnWithError("Invalid input.");
         exit();
     }
@@ -30,9 +28,12 @@
 		$stmt->bind_param("ii", $contactId, $userId);
 		$stmt->execute();
 
-        if( $stmt->affected_rows > 0){
+        if( $stmt->affected_rows > 0)
+		{
             returnWithInfo();
-        } else{
+        } 
+		else
+		{
             returnWithError("Contact not found");
         }
 
@@ -62,5 +63,4 @@
 		$retValue = '{"error":""}';
 		sendResultInfoAsJson( $retValue );
 	}
-	
 ?>

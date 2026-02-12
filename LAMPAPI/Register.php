@@ -1,8 +1,6 @@
-
 <?php
 	$inData = getRequestInfo();
 	
-
 	// Validating that required keys exist
 	if(!isset($inData["firstName"]) || !isset($inData["lastName"])
 		|| !isset($inData["login"]) || !isset($inData["password"]))
@@ -24,7 +22,8 @@
 	}
 
 	// connect to database
-	$conn = new mysqli("localhost", "contact_api", "1JERKApassword", "contact_manager"); 	
+	$conn = new mysqli("localhost", "contact_api", "1JERKApassword", "contact_manager");
+
 	if( $conn->connect_error )
 	{
 		returnWithError( $conn->connect_error );
@@ -44,6 +43,7 @@
 		returnWithError("Login already exists");
 		exit();
 	}
+
 	$stmt->close();
 
 	$stmt = $conn->prepare("INSERT INTO Users (FirstName, LastName, Login, Password) VALUES (?, ?, ?, ?)");
@@ -87,5 +87,4 @@
 		$retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
 		sendResultInfoAsJson( $retValue );
 	}
-	
 ?>
