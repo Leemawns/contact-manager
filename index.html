@@ -16,13 +16,47 @@
             <h1 id="title">Pair-A-Dice Coffee Co.</h1>
             <h1 id="subtitle">Inner Circle</h1>
         </div>
-        <div id="loginDiv">
-            <input type="text" id="loginName" placeholder="Username" /><br />
-            <input type="password" id="loginPassword" placeholder="Password" /><br />
-            <button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Login </button>
-            <button type="button" id="registerButton" class="buttons" onclick="goToRegister();"> Register </button>
-            <h1 id ="registertext">Don't have an account?</h1>
-            <span id="loginResult"></span>
+        <h1 id="title">Pair-A-Dice Coffee Co.</h1>
+        <h1 id="subtitle">Inner Circle</h1>
+    </div>
+    <div id="loginDiv">
+        <div class="input-row">
+            <label for="loginName">Username: </label>
+            <input type="text" id="loginName" placeholder="Username" />
+            <div class="error-row" id="usernameError"></div>
         </div>
-    </body>
+        <div class="input-row">
+            <label for="loginPassword">Password: </label>
+            <input type="password" id="loginPassword" placeholder="Password" />
+            <div class="error-row" id="passwordError"></div>
+        </div>
+        
+        <div id="registerFields">
+            <div class="input-row">
+                <label for="confirmPassword">Confirm Password: </label>
+                <input type="password" id="confirmPassword" placeholder="Confirm Password" />
+                <div class="error-row" id="confirmPasswordError"></div>
+            </div>
+            <div class="input-row">
+                <label for="firstName">First Name: </label>
+                <input type="text" id="firstName" placeholder="First Name" />
+                <div class="error-row" id="firstNameError"></div>
+            </div>
+            <div class="input-row">
+                <label for="lastName">Last Name: </label>
+                <input type="text" id="lastName" placeholder="Last Name" />
+                <div class="error-row" id="lastNameError"></div>
+            </div>
+        </div>
+        
+        <button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Login </button>
+        <button type="button" id="registerButton" class="buttons" onclick="toggleRegister();"> Register </button>
+        
+        <div class="error-row" id="loginResult"></div>
+    </div>
+
+
+
+</body>
+
 </html>

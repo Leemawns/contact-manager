@@ -289,5 +289,183 @@ function saveEdit()
     xhr.send(JSON.stringify(tmp));
 }
 
+let isRegisterMode = false;
+
+function toggleRegister()
+{
+	isRegisterMode = !isRegisterMode;
+	
+	const registerFields = document.getElementById("registerFields");
+	const loginButton = document.getElementById("loginButton");
+	const registerButton = document.getElementById("registerButton");
+	const registerText = document.getElementById("registertext");
+	
+	if (isRegisterMode) {
+		// Switch to register mode
+		registerFields.classList.add('show');
+		loginButton.textContent = 'Create Account';
+		loginButton.onclick = doRegister;
+		registerButton.textContent = 'Back to Login';
+		registerText.textContent = 'Already have an account?';
+		document.body.style.overflowY = "auto";
+	} else {
+		// Switch to login mode
+		registerFields.classList.remove('show');
+		loginButton.textContent = 'Login';
+		loginButton.onclick = doLogin;
+		registerButton.textContent = 'Register';
+		registerText.textContent = "Don't have an account?";
+		document.body.style.overflowY = "hidden";
+		
+		// Clear registration fields
+		document.getElementById("confirmPassword").value = "";
+		document.getElementById("firstName").value = "";
+		document.getElementById("lastName").value = "";
+		document.getElementById("email").value = "";
+		document.getElementById("phone").value = "";
+	}
+	
+	document.getElementById("loginResult").innerHTML = "";
+}
+
+function doRegister()
+{
+	let login = document.getElementById("loginName").value;
+	let password = document.getElementById("loginPassword").value;
+	let confirmPassword = document.getElementById("confirmPassword").value;
+	let firstName = document.getElementById("firstName").value;
+	let lastName = document.getElementById("lastName").value;
+	
+	// error messages
+	let loginResult = document.getElementById("loginResult");
+	let passwordError = document.getElementById("passwordError");
+	let confirmPasswordError = document.getElementById("confirmPasswordError");
 
 
+	let valid = true;
+	
+	// Ensure no empty inputs
+	if (!login || !password || !confirmPassword || !firstName || !lastName) {
+		loginResult.innerHTML = "Please fill in all required fields";
+		valid = false;
+	}
+	else {
+		loginResult.innerHTML = "";
+	}
+
+	// password length check
+	if (password.length < 8) {
+		passwordError.innerHTML = "Password must be at least 8 characters long";
+		valid = false;
+	}
+	else {
+		passwordError.innerHTML = "";
+	}
+
+	// password match check
+	if (password != confirmPassword) {
+		confirmPasswordError.innerHTML = "Passwords do not match";
+		valid = false;
+	}
+	else {
+		confirmPasswordError.innerHTML = "";
+	}
+
+	if (!valid) {
+		console.log("invalid input")
+		return;
+	}
+	
+	console.log("valid input.")
+
+	let tmp = {
+		login: login,
+		password: password,
+		firstName: firstName,
+		lastName: lastName
+	};
+	let jsonPayload = JSON.stringify(tmp);
+	
+	let url = urlBase + '/Register.' + extension;
+	
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				let jsonObject = JSON.parse(xhr.responseText);
+				
+				if (jsonObject.error) {
+					document.getElementById("loginResult").innerHTML = jsonObject.error;
+					return;
+				}
+				
+				document.getElementById("loginResult").innerHTML = "Registration successful! Please login.";
+				
+				// Switch back to login mode after successful registration
+				setTimeout(function() {
+					toggleRegister();
+					document.getElementById("loginName").value = login;
+					document.getElementById("loginPassword").value = "";
+					document.getElementById("loginResult").innerHTML = "";
+				}, 2000);
+			}
+		};
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("loginResult").innerHTML = err.message;
+	}
+}
+
+function doLogin() {
+	let login = document.getElementById("loginName").value;
+	let password = document.getElementById("loginPassword").value;
+	//	var hash = md5( password );
+	
+	document.getElementById("loginResult").innerHTML = "";
+
+	let tmp = {login:login,password:password};
+	//	var tmp = {login:login,password:hash};
+	let jsonPayload = JSON.stringify( tmp );
+	
+	let url = urlBase + '/Login.' + extension;
+
+	let xhr = new XMLHttpRequest();
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+	try
+	{
+		xhr.onreadystatechange = function() 
+		{
+			if (this.readyState == 4 && this.status == 200) 
+			{
+				let jsonObject = JSON.parse( xhr.responseText );
+				userId = jsonObject.id;
+		
+				if( userId < 1 )
+				{		
+					document.getElementById("loginResult").innerHTML = "User/Password combination incorrect";
+					return;
+				}
+		
+				firstName = jsonObject.firstName;
+				lastName = jsonObject.lastName;
+
+				saveCookie();
+	
+				window.location.href = "color.html";
+			}
+		};
+		xhr.send(jsonPayload);
+	}
+	catch(err)
+	{
+		document.getElementById("loginResult").innerHTML = err.message;
+	}
+}
