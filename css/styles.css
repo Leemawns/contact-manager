@@ -4,9 +4,7 @@
     height: 100vh;
     overflow-y: hidden;
     overflow-x: hidden;
-
-    background-image: url('/images/beans.jpg');
-    background-size: cover;
+    color: white;
 
     font-family: "Montserrat", sans-serif;
 }
@@ -182,8 +180,7 @@ input[type="password"] {
   margin-bottom: 10px;
   height: 4.8%;
   font-size: 24px;
-
-  justify-content: center;
+  margin-left: 33%;
   border-radius: 30px;
   text-align: center;
 
@@ -384,6 +381,7 @@ input[type="ModalText"] {
   margin: 20px;
   margin-top: 30px;
   font-size: 20px;
+  height: 35px;
  }
 
 #contactAddResult, #contactUpdateResult, #contactDeleteResult {
@@ -403,6 +401,7 @@ input[type="ModalText"] {
 #editButton, #deleteButton, #saveButton, #cancelButton {
   display: inline;
   width: 20%;
+  height: 35px;
   margin: 20px;
   font-size: 20px;
   align-items: center;

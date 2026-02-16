@@ -13,7 +13,7 @@
     $phone = trim($inData["phone"]);
     $email = trim($inData["email"]);
 
-    if($userId <= 0 || $firstName === "" || $lastName === "" || $phone === "" || $email === "")
+    if($userId < 0 || $firstName === "" || $lastName === "" || $phone === "" || $email === "")
     {
         returnWithError("Fields cannot be empty");
         exit();

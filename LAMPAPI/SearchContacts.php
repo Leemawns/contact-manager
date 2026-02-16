@@ -10,7 +10,7 @@
     $userId = (int)$inData["userId"];
     $search = trim((string)$inData["search"]);
 
-    if($userId <= 0)
+    if($userId < 0)
     {
         returnWithError("Invalid input.");
         exit();

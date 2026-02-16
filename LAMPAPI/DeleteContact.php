@@ -10,7 +10,7 @@
 	$userId = (int)$inData["userId"];
 	$contactId = (int)($inData["contactId"]);
 
-    if($userId <= 0 || $contactId <= 0)
+    if($userId < 0 || $contactId <= 0)
 	{
         returnWithError("Invalid input.");
         exit();
