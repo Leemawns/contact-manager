@@ -41,7 +41,7 @@ function addContact() {
 	if (!valid)
 		return;
 
-	tmp[userId] = userId;
+	tmp['userId'] = userId;
 
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", urlBase + "/AddContact." + extension, true);
@@ -61,31 +61,41 @@ function addContact() {
 function validateContactFields(mode) {
 	let valid = true;
 
+	let first = null;
+	let last = null;
+	let emailAddress = null;
+	let phoneNumber = null;
+
+	let firstError = null;
+	let lastError = null;
+	let emailError = null;
+	let phoneError = null;
+	
 	if (mode == "add") {
 		// get add values
-		let first = document.getElementById("firstNameText").value.trim();
-		let last = document.getElementById("lastNameText").value.trim();
-		let emailAddress = document.getElementById("emailText").value.trim();
-		let phoneNumber = document.getElementById("phoneNumber").value.trim();
+		first = document.getElementById("firstNameText").value.trim();
+		last = document.getElementById("lastNameText").value.trim();
+		emailAddress = document.getElementById("emailText").value.trim();
+		phoneNumber = document.getElementById("phoneNumber").value.trim();
 
 		// get error rows
-		let firstError = document.getElementById("add-first-error");
-		let lastError = document.getElementById("add-last-error")
-		let emailError = document.getElementById("add-email-error");
-		let phoneError = document.getElementById("add-phone-error")
+		firstError = document.getElementById("add-first-error");
+		lastError = document.getElementById("add-last-error");
+		emailError = document.getElementById("add-email-error");
+		phoneError = document.getElementById("add-phone-error");
 	}
 	else {
 		// get edit values
-		let first = document.getElementById("modalFirstName").value.trim();
-		let last = document.getElementById("modalLastName").value.trim();
-		let emailAddress = document.getElementById("modalEmail").value.trim();
-		let phoneNumber = document.getElementById("modalPhone").value.trim();
+		first = document.getElementById("modalFirstName").value.trim();
+		last = document.getElementById("modalLastName").value.trim();
+		emailAddress = document.getElementById("modalEmail").value.trim();
+		phoneNumber = document.getElementById("modalPhone").value.trim();
 
 		// get error rows
-		let firstError = document.getElementById("edit-first-error");
-		let lastError = document.getElementById("edit-last-error")
-		let emailError = document.getElementById("edit-email-error");
-		let phoneError = document.getElementById("edit-phone-error")
+		firstError = document.getElementById("edit-first-error");
+		lastError = document.getElementById("edit-last-error");
+		emailError = document.getElementById("edit-email-error");
+		phoneError = document.getElementById("edit-phone-error");
 	}
 
 	// reset errors
@@ -118,12 +128,12 @@ function validateContactFields(mode) {
 		valid = false;
 	}
 
-	return valid, {
-		firstName: firstName,
-		lastName: lastName,
-		email: email,
-		phone: phone
-	}
+	return [valid, {
+		firstName: first,
+		lastName: last,
+		email: emailAddress,
+		phone: phoneNumber,
+	}];
 }
 
 function searchContact() {
@@ -184,6 +194,7 @@ function openAddModal() {
 	const modal = document.getElementById('addModal');
 	modal.classList.remove('exit');
 	modal.classList.add('open');
+
 }
 
 function closeAddModal() {
@@ -195,6 +206,12 @@ function closeAddModal() {
 	document.getElementById('emailText').value = '';
 	document.getElementById('phoneNumber').value = '';
 	document.getElementById('contactAddResult').innerHTML = '';
+
+	// remove all errors
+	firstError = document.getElementById("add-first-error").innerHTML = "";
+	lastError = document.getElementById("add-last-error").innerHTML = "";
+	emailError = document.getElementById("add-email-error").innerHTML = "";
+	phoneError = document.getElementById("add-phone-error").innerHTML = "";
 
 
 	modal.addEventListener('animationend', function () {
@@ -316,11 +333,17 @@ function disableEdit() {
 	document.getElementById("deleteButton").style.display = "inline";
 	document.getElementById("saveButton").style.display = "none";
 	document.getElementById("cancelButton").style.display = "none";
+	
+	// remove all errors
+	firstError = document.getElementById("edit-first-error").innerHTML = "";
+	lastError = document.getElementById("edit-last-error").innerHTML = "";
+	emailError = document.getElementById("edit-email-error").innerHTML = "";
+	phoneError = document.getElementById("edit-phone-error").innerHTML = "";
 
 }
 
 function saveEdit() {
-	data = validateContactFields("add");
+	data = validateContactFields("edit");
 
 	valid = data[0];
 	tmp = data[1];
@@ -329,8 +352,8 @@ function saveEdit() {
 	if (!valid)
 		return;
 	
-	tmp[contactId] = currentContactId;
-	tmp[userId] = userId;
+	tmp['contactId'] = currentContactId;
+	tmp['userId'] = userId;
 
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", urlBase + "/UpdateContact." + extension, true);
@@ -383,6 +406,12 @@ function toggleRegister() {
 		document.getElementById("email").value = "";
 		document.getElementById("phone").value = "";
 	}
+	
+	// clear error fields any time when swapping
+	let loginResult = document.getElementById("loginResult").innerHTML = "";
+	let usernameError = document.getElementById("usernameError").innerHTML = "";
+	let passwordError = document.getElementById("passwordError").innerHTML = "";
+	let confirmPasswordError = document.getElementById("confirmPasswordError").innerHTML = "";
 
 	document.getElementById("loginResult").innerHTML = "";
 }
