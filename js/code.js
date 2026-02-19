@@ -6,6 +6,18 @@ let lastName = "";
 let currentContactId = null;
 let userId = 0;
 
+function validateEmail(email) {
+	let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+	return regex.test(email);
+}
+
+function validatePhone(phone) {
+	let regex = /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/;
+
+	return regex.test(phone);
+}
+
 function doLogout() {
 	userId = 0;
 	firstName = "";
@@ -20,13 +32,16 @@ function addContact() {
 		return;
 	}
 
-	let tmp = {
-		firstName: document.getElementById("firstNameText").value,
-		lastName: document.getElementById("lastNameText").value,
-		email: document.getElementById("emailText").value,
-		phone: document.getElementById("phoneNumber").value,
-		userId: userId
-	};
+	data = validateContactFields("add");
+
+	valid = data[0];
+	tmp = data[1];
+
+	// invalid data, skip
+	if (!valid)
+		return;
+
+	tmp[userId] = userId;
 
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", urlBase + "/AddContact." + extension, true);
@@ -41,6 +56,74 @@ function addContact() {
 	};
 
 	xhr.send(JSON.stringify(tmp));
+}
+
+function validateContactFields(mode) {
+	let valid = true;
+
+	if (mode == "add") {
+		// get add values
+		let first = document.getElementById("firstNameText").value.trim();
+		let last = document.getElementById("lastNameText").value.trim();
+		let emailAddress = document.getElementById("emailText").value.trim();
+		let phoneNumber = document.getElementById("phoneNumber").value.trim();
+
+		// get error rows
+		let firstError = document.getElementById("add-first-error");
+		let lastError = document.getElementById("add-last-error")
+		let emailError = document.getElementById("add-email-error");
+		let phoneError = document.getElementById("add-phone-error")
+	}
+	else {
+		// get edit values
+		let first = document.getElementById("modalFirstName").value.trim();
+		let last = document.getElementById("modalLastName").value.trim();
+		let emailAddress = document.getElementById("modalEmail").value.trim();
+		let phoneNumber = document.getElementById("modalPhone").value.trim();
+
+		// get error rows
+		let firstError = document.getElementById("edit-first-error");
+		let lastError = document.getElementById("edit-last-error")
+		let emailError = document.getElementById("edit-email-error");
+		let phoneError = document.getElementById("edit-phone-error")
+	}
+
+	// reset errors
+	firstError.innerHTML = "";
+	lastError.innerHTML = "";
+	emailError.innerHTML = "";
+	phoneError.innerHTML = "";
+
+	// check if first name is empty
+	if (first == "") {
+		firstError.innerHTML = "Please enter a first name.";
+		valid = false;
+	}
+
+	// check if last name is empty
+	if (last == "") {
+		lastError.innerHTML = "Please enter a last name.";
+		valid = false;
+	}
+
+	// verify email
+	if (!validateEmail(emailAddress)) {
+		emailError.innerHTML = "Invalid email address.";
+		valid = false;
+	}
+
+	// verify phone
+	if (!validatePhone(phoneNumber)) {
+		phoneError.innerHTML = "Invalid phone number.";
+		valid = false;
+	}
+
+	return valid, {
+		firstName: firstName,
+		lastName: lastName,
+		email: email,
+		phone: phone
+	}
 }
 
 function searchContact() {
@@ -124,6 +207,7 @@ function closeAddModal() {
 function contactAdded() {
 	addContact();
 }
+
 function deleteCurrentContact() {
 
 	let tmp = {
@@ -236,19 +320,17 @@ function disableEdit() {
 }
 
 function saveEdit() {
-	let firstName = document.getElementById("modalFirstName").value.trim();
-	let lastName = document.getElementById("modalLastName").value.trim();
-	let phone = document.getElementById("modalPhone").value.trim();
-	let email = document.getElementById("modalEmail").value.trim();
+	data = validateContactFields("add");
 
-	let tmp = {
-		contactId: currentContactId,
-		firstName: firstName,
-		lastName: lastName,
-		phone: phone,
-		email: email,
-		userId: userId
-	};
+	valid = data[0];
+	tmp = data[1];
+
+	// invalid data, skip
+	if (!valid)
+		return;
+	
+	tmp[contactId] = currentContactId;
+	tmp[userId] = userId;
 
 	let xhr = new XMLHttpRequest();
 	xhr.open("POST", urlBase + "/UpdateContact." + extension, true);
@@ -278,7 +360,6 @@ function toggleRegister() {
 	const registerFields = document.getElementById("registerFields");
 	const loginButton = document.getElementById("loginButton");
 	const registerButton = document.getElementById("registerButton");
-	const registerText = document.getElementById("registertext");
 
 	if (isRegisterMode) {
 		// Switch to register mode
@@ -286,7 +367,6 @@ function toggleRegister() {
 		loginButton.textContent = 'Create Account';
 		loginButton.onclick = doRegister;
 		registerButton.textContent = 'Back to Login';
-		registerText.textContent = 'Already have an account?';
 		document.body.style.overflowY = "auto";
 	} else {
 		// Switch to login mode
@@ -294,7 +374,6 @@ function toggleRegister() {
 		loginButton.textContent = 'Login';
 		loginButton.onclick = doLogin;
 		registerButton.textContent = 'Register';
-		registerText.textContent = "Don't have an account?";
 		document.body.style.overflowY = "hidden";
 
 		// Clear registration fields
@@ -409,9 +488,31 @@ function doRegister() {
 }
 
 function doLogin() {
-	let login = document.getElementById("loginName").value;
-	let password = document.getElementById("loginPassword").value;
+	// handle registration if needed
+	if (isRegisterMode){
+		doRegister();
+		return;
+	}
+
+	let login = document.getElementById("loginName").value.trim();
+	let password = document.getElementById("loginPassword").value.trim();
 	//	var hash = md5( password );
+
+	let usernameError = document.getElementById("usernameError");
+	let passwordError = document.getElementById("passwordError");
+
+	usernameError.innerHTML = "";
+	passwordError.innerHTML = "";
+
+	if (login == "")
+	{
+		usernameError.innerHTML = "Please provide a valid username."
+	}
+
+	if (password == "")
+	{
+		passwordError.innerHTML = "Please provide a valid password."
+	}
 
 	document.getElementById("loginResult").innerHTML = "";
 

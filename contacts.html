@@ -45,19 +45,37 @@
                 </div>
 
                 <div class="modalRow">
+                    <p id="add-first-error" class="error-row"></p>
+                </div>
+
+                <div class="modalRow">
                     <label for="lastNameText">Last Name:</label>
                     <input type="ModalText" class="modalText" id="lastNameText">
+                </div>
+
+
+                <div class="modalRow">
+                    <p id="add-last-error" class="error-row"></p>
                 </div>
 
                 <div class="modalRow">
                     <label for="phoneNumber">Phone:</label>
                     <input type="ModalText" class="modalText" id="phoneNumber">
                 </div>
+                
+                <div class="modalRow">
+                    <p id="add-phone-error" class="error-row"></p>
+                </div>
 
                 <div class="modalRow">
                     <label for="emailText">Email:</label>
                     <input type="ModalText" class="modalText" id="emailText">
                 </div>
+
+                <div class="modalRow">
+                    <p id="add-email-error" class="error-row"></p>
+                </div>
+                
             <button type="button" class="Buttons" id="modalButtons" onclick="closeAddModal();"> Cancel </button>
             <button type="button" class="Buttons" id="modalButtons" onclick="contactAdded();"> Add </button><br />
         </div>
@@ -76,8 +94,16 @@
             </div>
 
             <div class="modalRow">
+                <p id="edit-first-error" class="error-row"></p>
+            </div>
+
+            <div class="modalRow">
                 <label for="modalLastName">Last Name:</label>
                 <input type="ModalText" class="modalText" id="modalLastName" disabled>
+            </div>
+
+            <div class="modalRow">
+                <p id="edit-last-error" class="error-row"></p>
             </div>
 
             <div class="modalRow">
@@ -86,8 +112,17 @@
             </div>
 
             <div class="modalRow">
+                <p id="edit-phone-error" class="error-row"></p>
+            </div>
+
+            <div class="modalRow">
                 <label for="modalEmail">Email:</label>
                 <input type="ModalText" class="modalText" id="modalEmail" disabled>
+            </div>
+                
+
+            <div class="modalRow">
+                <p id="edit-email-error" class="error-row"></p>
             </div>
         
             <div class="modal-actions">
