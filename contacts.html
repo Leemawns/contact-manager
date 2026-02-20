@@ -3,7 +3,7 @@
 
     <title> Pair-A-Dice Coffee Company</title>
     	<script type="text/javascript" src="js/code.js"></script>
-    <link href="css/styles.css" rel="stylesheet">	
+    <link href="css/styles-patel.css" rel="stylesheet">	
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     	
 	<script type="text/javascript">
@@ -12,25 +12,41 @@
 </head>
 
 <body>
-	<img src ="images/logo.png" id="smallLogo"> 
-	<br />
-	<h1	id ="logTitle">Pair-A-Dice Coffee Co. <button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button> 
-	</h1>
 
+    <header id="header">
+        <img src="images/logo.png" id="smallLogo">
+
+        <h1 id="logTitle">Pair-A-Dice Coffee Co.</h1>
+        <button type="button" id="logoutButton" class="buttons" onclick="doLogout();">Log Out</button>
+    
+    </header>
+    
     <div id="accessUIDiv">
+        <img src="images/tree-left.png" alt= "Palm Tree" id="tree-left">
+        <img src="images/tree-right.png" alt="Palm Tree" id="tree-right">
+        
+        <div class="search-container">
+            <input type="text" id="searchText" placeholder="Search Name" />
+            <button type="button" id="searchNameButton" class="search-button" onclick="searchContact();">
+                <img src="images/search.png" alt="Search" class="search-icon">
+            </button>
 
-        <input type="text" id="searchText" placeholder="Search Name" />
-        <button type="button" id="searchNameButton" class="search-button" onclick="searchContact();"></button>
-        <br />
-		<span id="contactSearchResult"></span>
-        <div id="contactTable">
         </div>
-	</div>
-	<br />
+        <span id="contactSearchResult"></span>
+        <div id="contactTable"></div>
 
-	<div id="accessUIDiv">
-		<h1 id="subtext">Can't Find Them?</h1>
- 		<button type="button" id="openModal" class ="buttons" onclick="openAddModal()">Add Contact</button>
+    </div>
+
+    <br />  
+
+    <div id="addDiv" class="add-container">
+        <img src="images/dice-left.png" alt="Die" id="dice-left">
+        <img src="images/dice-right.png" alt="Die" id="dice-right">
+
+        <div class="add-container-content">
+            <h2 id="subtext">Can't Find Them?</h2>
+            <button type="button" id="openModal" class="buttons" onclick="openAddModal()">Add Contact</button>
+        </div>
     </div>
 	
 </body>
@@ -60,8 +76,8 @@
                 <label for="emailText">Email:</label>
                 <input type="ModalText" class="modalText" id="emailText">
             </div>
-	    <button type="button" class="Buttons" id="modalButtons" onclick="closeAddModal();"> Cancel </button>
-	    <button type="button" class="Buttons" id="modalButtons" onclick="contactAdded();"> Add </button><br />
+	    <button type="button" class="buttons" id="modalButtons" onclick="closeAddModal();"> Cancel </button>
+	    <button type="button" class="buttons" id="modalButtons" onclick="contactAdded();"> Add </button><br />
     </div>
 </div>
 
@@ -69,7 +85,7 @@
     <div class="modal-content">
         <span class="close" onclick="closeContactModal()">&times;</span>
 
-        <h2 id="modalName"></h2>
+        <h3 id="modalName"></h3>
         <span id="contactUpdateResult"></span>
         <br>
         <div class="modalRow">
@@ -93,10 +109,10 @@
         </div>
     
         <div class="modal-actions">
-            <button type="button" class="Buttons" id="editButton" onclick="enableEdit()">Edit</button> 
-            <button type="button" class="Buttons" id= "cancelButton" onclick="disableEdit()">Cancel</button>
-            <button type="button" class="Buttons" id="saveButton" onclick="saveEdit()">Save</button>
-            <button type="button" class="Buttons" id= "deleteButton" onclick="opendeleteModal()">Delete</button>
+            <button type="button" class="buttons" id="editButton" onclick="enableEdit()">Edit</button> 
+            <button type="button" class="buttons" id= "cancelButton" onclick="disableEdit()">Cancel</button>
+            <button type="button" class="buttons" id="saveButton" onclick="saveEdit()">Save</button>
+            <button type="button" class="buttons" id= "deleteButton" onclick="opendeleteModal()">Delete</button>
         </div>
     </div>
 </div>
