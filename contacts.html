@@ -51,10 +51,9 @@
 	
 </body>
 
-<div id="addModal" class="modal">
+    <div id="addModal" class="modal">
     <div class="modal-content">
-        <span class="close" onclick="closeAddModal()">&times;</span>
-    
+        <span class="close" onclick="closeAddModal()">&times;</span>   
         <h3 id ="modalText">Add Contact</h3>
         <span id ="contactAddResult"></span>
             <div class="modalRow">
@@ -63,59 +62,93 @@
             </div>
 
             <div class="modalRow">
+                <p id="add-first-error" class="error-row"></p>
+            </div>
+
+            <div class="modalRow">
                 <label for="lastNameText">Last Name:</label>
                 <input type="ModalText" class="modalText" id="lastNameText">
+            </div>
+
+            <div class="modalRow">
+                <p id="add-last-error" class="error-row"></p>
             </div>
 
             <div class="modalRow">
                 <label for="phoneNumber">Phone:</label>
                 <input type="ModalText" class="modalText" id="phoneNumber">
             </div>
+                
+            <div class="modalRow">
+                <p id="add-phone-error" class="error-row"></p>
+            </div>
 
             <div class="modalRow">
                 <label for="emailText">Email:</label>
                 <input type="ModalText" class="modalText" id="emailText">
             </div>
-	    <button type="button" class="buttons" id="modalButtons" onclick="closeAddModal();"> Cancel </button>
-	    <button type="button" class="buttons" id="modalButtons" onclick="contactAdded();"> Add </button><br />
-    </div>
-</div>
 
-<div id="contactModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeContactModal()">&times;</span>
-
-        <h3 id="modalName"></h3>
-        <span id="contactUpdateResult"></span>
-        <br>
-        <div class="modalRow">
-            <label for="modalFirstName">First Name:</label>
-            <input type="ModalText" class="modalText" id="modalFirstName" disabled>
-        </div>
-
-        <div class="modalRow">
-            <label for="modalLastName">Last Name:</label>
-            <input type="ModalText" class="modalText" id="modalLastName" disabled>
-        </div>
-
-        <div class="modalRow">
-            <label for="modalPhone">Phone:</label>
-            <input type="ModalText" class="modalText" id="modalPhone" disabled>
-        </div>
-
-        <div class="modalRow">
-            <label for="modalEmail">Email:</label>
-            <input type="ModalText" class="modalText" id="modalEmail" disabled>
-        </div>
-    
-        <div class="modal-actions">
-            <button type="button" class="buttons" id="editButton" onclick="enableEdit()">Edit</button> 
-            <button type="button" class="buttons" id= "cancelButton" onclick="disableEdit()">Cancel</button>
-            <button type="button" class="buttons" id="saveButton" onclick="saveEdit()">Save</button>
-            <button type="button" class="buttons" id= "deleteButton" onclick="opendeleteModal()">Delete</button>
+            <div class="modalRow">
+                <p id="add-email-error" class="error-row"></p>
+            </div>
+                
+            <button type="button" class="Buttons" id="modalButtons" onclick="closeAddModal();"> Cancel </button>
+            <button type="button" class="Buttons" id="modalButtons" onclick="contactAdded();"> Add </button><br />
         </div>
     </div>
-</div>
+
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeContactModal()">&times;</span>
+
+            <h2 id="modalName"></h2>
+            <span id="contactUpdateResult"></span>
+            <br>
+            <div class="modalRow">
+                <label for="modalFirstName">First Name:</label>
+                <input type="ModalText" class="modalText" id="modalFirstName" disabled>
+            </div>
+
+            <div class="modalRow">
+                <p id="edit-first-error" class="error-row"></p>
+            </div>
+
+            <div class="modalRow">
+                <label for="modalLastName">Last Name:</label>
+                <input type="ModalText" class="modalText" id="modalLastName" disabled>
+            </div>
+
+            <div class="modalRow">
+                <p id="edit-last-error" class="error-row"></p>
+            </div>
+
+            <div class="modalRow">
+                <label for="modalPhone">Phone:</label>
+                <input type="ModalText" class="modalText" id="modalPhone" disabled>
+            </div>
+
+            <div class="modalRow">
+                <p id="edit-phone-error" class="error-row"></p>
+            </div>
+
+            <div class="modalRow">
+                <label for="modalEmail">Email:</label>
+                <input type="ModalText" class="modalText" id="modalEmail" disabled>
+            </div>
+                
+
+            <div class="modalRow">
+                <p id="edit-email-error" class="error-row"></p>
+            </div>
+        
+            <div class="modal-actions">
+                <button type="button" class="Buttons" id="editButton" onclick="enableEdit()">Edit</button> 
+                <button type="button" class="Buttons" id= "cancelButton" onclick="disableEdit()">Cancel</button>
+                <button type="button" class="Buttons" id="saveButton" onclick="saveEdit()">Save</button>
+                <button type="button" class="Buttons" id= "deleteButton" onclick="opendeleteModal()">Delete</button>
+            </div>
+        </div>
+    </div>
 
 <div class="modal" id="deleteModal">
     <div class="modal-content" id="deleteModalContents">
@@ -139,4 +172,5 @@
 <div id="contactTable"></div>
 
 
-</html>
+</html>>
+
