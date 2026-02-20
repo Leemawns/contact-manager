@@ -1,80 +1,96 @@
 <html>
-    <head>
-        <title> Pair-A-Dice - Contacts</title>
-        <link rel="icon" type="image/png" href="images/logo.png">
-            <script type="text/javascript" src="js/code.js"></script>
-        <link href="css/styles.css" rel="stylesheet">	
-        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-            
-        <script type="text/javascript">
-        </script>   
-    </head>
+<head>
 
-    <body>
-        <img src ="images/logo.png" id="smallLogo"> 
-        <br />
-        <h1	id ="logTitle">Pair-A-Dice Coffee Co. <button type="button" id="logoutButton" class="buttons" onclick="doLogout();"> Log Out </button> 
-        </h1>
+    <title> Pair-A-Dice Coffee Company</title>
+    	<script type="text/javascript" src="js/code.js"></script>
+    <link href="css/styles-patel.css" rel="stylesheet">	
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    	
+	<script type="text/javascript">
+	</script>   
+	
+</head>
 
-        <div id="accessUIDiv">
+<body>
+
+    <header id="header">
+        <img src="images/logo.png" id="smallLogo">
+
+        <h1 id="logTitle">Pair-A-Dice Coffee Co.</h1>
+        <button type="button" id="logoutButton" class="buttons" onclick="doLogout();">Log Out</button>
+    
+    </header>
+    
+    <div id="accessUIDiv">
+        <img src="images/tree-left.png" alt= "Palm Tree" id="tree-left">
+        <img src="images/tree-right.png" alt="Palm Tree" id="tree-right">
+        
+        <div class="search-container">
             <input type="text" id="searchText" placeholder="Search Name" />
-            <button type="button" id="searchNameButton" class="search-button" onclick="searchContact();"></button>
-            <br />
-            <span id="contactSearchResult"></span>
-            <div id="contactTable">
-            </div>
-        </div>
+            <button type="button" id="searchNameButton" class="search-button" onclick="searchContact();">
+                <img src="images/search.png" alt="Search" class="search-icon">
+            </button>
 
-        <br />
-
-        <div id="accessUIDiv">
-            <h1 id="subtext">Can't Find Them?</h1>
-            <button type="button" id="openModal" class ="buttons" onclick="openAddModal()">Add Contact</button>
         </div>
-    </body>
+        <span id="contactSearchResult"></span>
+        <div id="contactTable"></div>
+
+    </div>
+
+    <br />  
+
+    <div id="addDiv" class="add-container">
+        <img src="images/dice-left.png" alt="Die" id="dice-left">
+        <img src="images/dice-right.png" alt="Die" id="dice-right">
+
+        <div class="add-container-content">
+            <h2 id="subtext">Can't Find Them?</h2>
+            <button type="button" id="openModal" class="buttons" onclick="openAddModal()">Add Contact</button>
+        </div>
+    </div>
+	
+</body>
 
     <div id="addModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeAddModal()">&times;</span>
-        
-            <h3 id ="modalText">Add Contact</h3>
-            <span id ="contactAddResult"></span>
-                <div class="modalRow">
-                    <label for="firstNameText">First Name:</label>
-                    <input type="ModalText" class="modalText" id="firstNameText">
-                </div>
+    <div class="modal-content">
+        <span class="close" onclick="closeAddModal()">&times;</span>   
+        <h3 id ="modalText">Add Contact</h3>
+        <span id ="contactAddResult"></span>
+            <div class="modalRow">
+                <label for="firstNameText">First Name:</label>
+                <input type="ModalText" class="modalText" id="firstNameText">
+            </div>
 
-                <div class="modalRow">
-                    <p id="add-first-error" class="error-row"></p>
-                </div>
+            <div class="modalRow">
+                <p id="add-first-error" class="error-row"></p>
+            </div>
 
-                <div class="modalRow">
-                    <label for="lastNameText">Last Name:</label>
-                    <input type="ModalText" class="modalText" id="lastNameText">
-                </div>
+            <div class="modalRow">
+                <label for="lastNameText">Last Name:</label>
+                <input type="ModalText" class="modalText" id="lastNameText">
+            </div>
 
+            <div class="modalRow">
+                <p id="add-last-error" class="error-row"></p>
+            </div>
 
-                <div class="modalRow">
-                    <p id="add-last-error" class="error-row"></p>
-                </div>
-
-                <div class="modalRow">
-                    <label for="phoneNumber">Phone:</label>
-                    <input type="ModalText" class="modalText" id="phoneNumber">
-                </div>
+            <div class="modalRow">
+                <label for="phoneNumber">Phone:</label>
+                <input type="ModalText" class="modalText" id="phoneNumber">
+            </div>
                 
-                <div class="modalRow">
-                    <p id="add-phone-error" class="error-row"></p>
-                </div>
+            <div class="modalRow">
+                <p id="add-phone-error" class="error-row"></p>
+            </div>
 
-                <div class="modalRow">
-                    <label for="emailText">Email:</label>
-                    <input type="ModalText" class="modalText" id="emailText">
-                </div>
+            <div class="modalRow">
+                <label for="emailText">Email:</label>
+                <input type="ModalText" class="modalText" id="emailText">
+            </div>
 
-                <div class="modalRow">
-                    <p id="add-email-error" class="error-row"></p>
-                </div>
+            <div class="modalRow">
+                <p id="add-email-error" class="error-row"></p>
+            </div>
                 
             <button type="button" class="Buttons" id="modalButtons" onclick="closeAddModal();"> Cancel </button>
             <button type="button" class="Buttons" id="modalButtons" onclick="contactAdded();"> Add </button><br />
@@ -134,24 +150,27 @@
         </div>
     </div>
 
-    <div class="modal" id="deleteModal">
-        <div class="modal-content" id="deleteModalContents">
-            <h2 id="modalText">Are you sure you would like to delete this contact?</h2>
-            <span id="contactDeleteResult"></span>
-            <div class="modal-actions">
-                <button type="button" class="buttons" id="modalButtons" onclick="closedeleteModal()">Cancel</button>
-                <button type="button" class="buttons" id="modalButtons" onclick="deleteContact()">Delete</button> <br>
-            </div>
+<div class="modal" id="deleteModal">
+    <div class="modal-content" id="deleteModalContents">
+        <h2 id="modalText">Are you sure you would like to delete this contact?</h2>
+        <span id="contactDeleteResult"></span>
+        <div class="modal-actions">
+            <button type="button" class="buttons" id="modalButtons" onclick="closedeleteModal()">Cancel</button>
+            <button type="button" class="buttons" id="modalButtons" onclick="deleteContact()">Delete</button> <br>
         </div>
     </div>
+</div>
 
-    </div>
+</div>
 
-        <template id="contactButtonTemplate">
-            <button class="contactButton">
-                <span class="contactName"></span>
-            </button>
-        </template>
+<template id="contactButtonTemplate">
+  <button class="contactButton">
+    <span class="contactName"></span>
+  </button>
+</template>
 
-    <div id="contactTable"></div>
-</html>
+<div id="contactTable"></div>
+
+
+</html>>
+
