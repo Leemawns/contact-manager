@@ -4,7 +4,7 @@ const extension = 'php';
 let firstName = "";
 let lastName = "";
 let currentContactId = null;
-let userId = 0;
+let userId = -1;
 
 function validateEmail(email) {
 	let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -22,7 +22,7 @@ function doLogout() {
 	userId = 0;
 	firstName = "";
 	lastName = "";
-	document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+	document.cookie = "userId= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
 	window.location.href = "index.html";
 }
 
@@ -423,6 +423,7 @@ function saveCookie(name, value, days) {
 		date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
 		expires = "; expires=" + date.toUTCString();
 	}
+
 	document.cookie = name + "=" + (value || "") + expires + "; path=/";
 }
 
@@ -568,7 +569,7 @@ function doLogin() {
 				firstName = jsonObject.firstName;
 				lastName = jsonObject.lastName;
 
-				saveCookie();
+				saveCookie("userId", userId, 7);
 
 				window.location.href = "contacts.html";
 			}
@@ -579,3 +580,29 @@ function doLogin() {
 		document.getElementById("loginResult").innerHTML = err.message;
 	}
 }
+
+function readSessionCookie() {
+	userId = -1;
+
+	const cookieName = "userId=";
+
+	cookies = document.cookie.split(";");
+
+	for (let i = 0; i < cookies.length; i++) {
+        let c = cookies[i];
+		
+        if (c.indexOf(cookieName) === 0) {
+			userId = parseInt(decodeURIComponent(c.substring(cookieName.length, c.length)));
+			return;
+        }
+    }
+
+	// no session cookie found, kick back out to main page
+	if (userId = -1 && window.location.href.endsWith("contacts.html")) {
+		window.location.href = "index.html";
+	}
+}
+
+document.addEventListener('DOMContentLoaded',  function() {
+	readSessionCookie();
+})
