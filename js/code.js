@@ -1,4 +1,4 @@
-const urlBase = 'http://group15.sedsucf.org/LAMPAPI';
+const urlBase = 'http://group15.sedsucf.org.org/LAMPAPI';
 const extension = 'php';
 
 let firstName = "";
@@ -22,6 +22,7 @@ function doLogout() {
 	userId = 0;
 	firstName = "";
 	lastName = "";
+	document.cookie = "userId= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
 	document.cookie = "userId= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
 	window.location.href = "index.html";
 }
@@ -189,7 +190,6 @@ function searchContact() {
 }
 
 
-
 function openAddModal() {
 	const modal = document.getElementById('addModal');
 	modal.classList.remove('exit');
@@ -200,6 +200,11 @@ function openAddModal() {
 function closeAddModal() {
 	const modal = document.getElementById('addModal');
 	modal.classList.add('exit');
+
+	setTimeout(() => {
+		modal.classList.remove('open');
+		modal.classList.remove('exit');
+	}, 400);
 
 	document.getElementById('firstNameText').value = '';
 	document.getElementById('lastNameText').value = '';
@@ -213,12 +218,6 @@ function closeAddModal() {
 	emailError = document.getElementById("add-email-error").innerHTML = "";
 	phoneError = document.getElementById("add-phone-error").innerHTML = "";
 
-
-	modal.addEventListener('animationend', function () {
-		if (modal.classList.contains('exit')) {
-			modal.classList.remove('open');
-		}
-	}, { once: true });
 }
 
 function contactAdded() {
@@ -272,21 +271,33 @@ function openContactModal(id, firstName, lastName, phone, email) {
 	document.getElementById("modalName").innerHTML =
 		firstName + " " + lastName;
 
-	document.getElementById("contactModal").style.display = "block";
+	const modal = document.getElementById("contactModal");
+  	modal.classList.remove("exit");
+  	modal.classList.add("open");
+	
 	document.getElementById("saveButton").style.display = "none";
 	document.getElementById("cancelButton").style.display = "none";
 }
 
+function closeModal(id) {
+	const modal = document.getElementById(id);
+
+	modal.classList.add("exit");
+
+	setTimeout(() => {
+		modal.classList.remove("open");
+    	modal.classList.remove("exit");
+	}, 400); // match animation duration
+}
+
 function closedeleteModal() {
-	document.getElementById("deleteModal").style.display = "none";
+	closeModal("deleteModal");
 }
 
 function opendeleteModal() {
-	document.getElementById("deleteModal").style.display = "block";
-}
-function deleteWarning() {
-	opendeleteModal();
-	closeContactModal();
+	const modal = document.getElementById("deleteModal");
+	modal.classList.remove("exit");
+	modal.classList.add("open");
 }
 
 function deleteContact() {
@@ -301,7 +312,7 @@ function deleteContact() {
 }
 
 function closeContactModal() {
-	document.getElementById("contactModal").style.display = "none";
+	closeModal("contactModal");
 	document.getElementById("editButton").style.display = "inline";
 	document.getElementById("deleteButton").style.display = "inline";
 	document.getElementById("saveButton").style.display = "none";
@@ -319,12 +330,15 @@ function enableEdit() {
 	document.getElementById("cancelButton").style.display = "inline";
 }
 
-function disableEdit() {
-
+function cancelEdit() {
 	document.getElementById("modalFirstName").value = originalContact.firstName;
 	document.getElementById("modalLastName").value = originalContact.lastName;
 	document.getElementById("modalPhone").value = originalContact.phone;
 	document.getElementById("modalEmail").value = originalContact.email;
+	disableEdit();
+}
+
+function disableEdit() {
 	document.getElementById("modalFirstName").disabled = true;
 	document.getElementById("modalLastName").disabled = true;
 	document.getElementById("modalPhone").disabled = true;
@@ -365,12 +379,19 @@ function saveEdit() {
 			document.getElementById("contactUpdateResult").innerHTML =
 				res.error === "" ? "Contact Updated" : res.error;
 
+			if(res.error === "") {
+				originalContact = {
+					firstName: tmp.firstName,
+					lastName: tmp.lastName,
+					phone: tmp.phone,
+					email: tmp.email
+				};
+				disableEdit();
+			}
 
 		}
 
 	};
-
-	disableEdit();
 
 	xhr.send(JSON.stringify(tmp));
 }
