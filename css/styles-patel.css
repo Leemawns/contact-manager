@@ -403,6 +403,10 @@ input[type="ModalText"] {
   margin-bottom: 30px;
 }
 
+#deleteModal {
+  background-opacity: 20%;
+}
+
 #deleteModalContents {
   height: 200px;
   margin-top: 15%

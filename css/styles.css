@@ -109,7 +109,7 @@ h1
 }
 
 .buttons {
-  height: 4.2%;
+  height: 5%;
   width: 20%;
 
   margin-left: 38%;
@@ -167,13 +167,12 @@ h1
 }
 
 .error-row {
-  color: red;
+  color: white;
   text-align: center;
   font-size: 16px;
   margin-left: 33%;
   width: 30%;
 }
-
 
 input[type="text"],
 input[type="password"] {
