@@ -383,28 +383,29 @@ function toggleRegister() {
 	const registerFields = document.getElementById("registerFields");
 	const loginButton = document.getElementById("loginButton");
 	const registerButton = document.getElementById("registerButton");
+	const authTitle = document.getElementById("authTitle");
 
 	if (isRegisterMode) {
 		// Switch to register mode
 		registerFields.classList.add('show');
-		loginButton.textContent = 'Create Account';
+		loginButton.textContent = 'Register';
 		loginButton.onclick = doRegister;
-		registerButton.textContent = 'Back to Login';
+		if (registerButton) registerButton.textContent = 'Back to Login';
+		if (authTitle) authTitle.textContent = 'Register';
 		document.body.style.overflowY = "auto";
 	} else {
 		// Switch to login mode
 		registerFields.classList.remove('show');
 		loginButton.textContent = 'Login';
 		loginButton.onclick = doLogin;
-		registerButton.textContent = 'Register';
+		if (registerButton) registerButton.textContent = 'Register';
+		if (authTitle) authTitle.textContent = 'Login';
 		document.body.style.overflowY = "hidden";
 
 		// Clear registration fields
 		document.getElementById("confirmPassword").value = "";
 		document.getElementById("firstName").value = "";
 		document.getElementById("lastName").value = "";
-		document.getElementById("email").value = "";
-		document.getElementById("phone").value = "";
 	}
 	
 	// clear error fields any time when swapping

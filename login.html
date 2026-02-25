@@ -1,0 +1,94 @@
+<html>
+    <head>
+        <link rel="icon" type="image/png" href="images/logo.png">
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap">
+        <script type="text/javascript" src="js/code.js"></script>
+        <title>Pair-A-Dice - Sign In</title>
+    </head>
+
+    <body class="auth-body">
+
+        <div class="auth-site-header">
+            <h1 class="auth-site-title">Pair-A-Dice Coffee Co.</h1>
+            <p class="auth-site-sub">Sign in to manage your rewards</p>
+        </div>
+
+        <div class="auth-card">
+            <!-- Tab Toggle -->
+            <div class="auth-tabs">
+                <button class="auth-tab active" id="loginTab" onclick="setAuthMode('login')">Login</button>
+                <button class="auth-tab" id="registerTab" onclick="setAuthMode('register')">Register</button>
+            </div>
+
+            <div class="input-row">
+                <label class="auth-label" for="loginName">Username</label>
+                <input type="text" id="loginName" placeholder="your_username" />
+                <div class="auth-error" id="usernameError"></div>
+            </div>
+            <div class="input-row">
+                <label class="auth-label" for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" placeholder="••••••••" />
+                <div class="auth-error" id="passwordError"></div>
+            </div>
+
+            <div id="registerFields">
+                <div class="input-row">
+                    <label class="auth-label" for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" placeholder="••••••••" />
+                    <div class="auth-error" id="confirmPasswordError"></div>
+                </div>
+                <div class="input-row">
+                    <label class="auth-label" for="firstName">First Name</label>
+                    <input type="text" id="firstName" placeholder="First name" />
+                    <div class="auth-error" id="firstNameError"></div>
+                </div>
+                <div class="input-row">
+                    <label class="auth-label" for="lastName">Last Name</label>
+                    <input type="text" id="lastName" placeholder="Last name" />
+                    <div class="auth-error" id="lastNameError"></div>
+                </div>
+            </div>
+
+            <button type="button" id="loginButton" class="auth-btn auth-btn-primary" onclick="doLogin()">Login</button>
+
+            <div class="auth-error" id="loginResult" style="margin-top: 10px;"></div>
+
+            <a href="index.html" class="auth-back">&#8592; Back to Home</a>
+        </div>
+
+        <!-- Coffee Waves -->
+        <div class="auth-wave-container">
+            <div class="coffee-wave wave1"></div>
+            <div class="coffee-wave wave2"></div>
+            <div class="coffee-wave wave3"></div>
+        </div>
+
+        <script>
+            function setAuthMode(mode) {
+                const loginTab = document.getElementById('loginTab');
+                const registerTab = document.getElementById('registerTab');
+                const isCurrentlyRegister = typeof isRegisterMode !== 'undefined' && isRegisterMode;
+
+                if (mode === 'register' && !isCurrentlyRegister) {
+                    toggleRegister();
+                    loginTab.classList.remove('active');
+                    registerTab.classList.add('active');
+                    document.getElementById('loginButton').textContent = 'Register';
+                } else if (mode === 'login' && isCurrentlyRegister) {
+                    toggleRegister();
+                    registerTab.classList.remove('active');
+                    loginTab.classList.add('active');
+                    document.getElementById('loginButton').textContent = 'Login';
+                }
+            }
+
+            // Auto-switch to register mode if #register hash is present
+            if (window.location.hash === '#register') {
+                setAuthMode('register');
+            }
+        </script>
+
+    </body>
+
+</html>

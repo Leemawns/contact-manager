@@ -3,52 +3,38 @@
         <link rel="icon" type="image/png" href="images/logo.png">
         <link rel="stylesheet" href="css/styles.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap">
-        <script type="text/javascript" src="js/code.js"></script>
         <title>Pair-A-Dice</title>
     </head>
 
+    <body class="landing-body">
 
-    <body class="login-body">
-        <div id="header">
+        <div class="landing-content">
             <div id="brandRow">
                 <img src="images/logo.png" alt="Pair-A-Dice logo" id="logo">
             </div>
             <h1 id="title">Pair-A-Dice Coffee Co.</h1>
-            <h1 id="subtitle">Inner Circle</h1>
-        </div>
-        <div id="loginDiv">
-            <div class="input-row">
-                <input type="text" id="loginName" placeholder="Username" />
-                <div class="error-row" id="usernameError"></div>
-            </div>
-            <div class="input-row">
-                <input type="password" id="loginPassword" placeholder="Password" />
-                <div class="error-row" id="passwordError"></div>
-            </div>
-        
-        <div id="registerFields">
-            <div class="input-row">
-                <input type="password" id="confirmPassword" placeholder="Confirm Password" />
-                <div class="error-row" id="confirmPasswordError"></div>
-            </div>
-            <div class="input-row">
-                <input type="text" id="firstName" placeholder="First Name" />
-                <div class="error-row" id="firstNameError"></div>
-            </div>
-            <div class="input-row">
-                <input type="text" id="lastName" placeholder="Last Name" />
-                <div class="error-row" id="lastNameError"></div>
+            <p class="landing-tagline">Your rewards. Your community.</p>
+            <div class="landing-buttons">
+                <a href="login.html" class="landing-btn landing-btn-primary">Login</a>
+                <a href="login.html#register" class="landing-btn landing-btn-secondary">Register</a>
             </div>
         </div>
-        
-        <button type="button" id="loginButton" class="buttons" onclick="doLogin();"> Login </button>
-        <button type="button" id="registerButton" class="buttons" onclick="toggleRegister();"> Register </button>
-        
-        <div class="error-row" id="loginResult"></div>
-    </div>
 
+        <!-- Coffee Animation -->
+        <div class="coffee-container">
+            <div class="bubble bubble1"></div>
+            <div class="bubble bubble2"></div>
+            <div class="bubble bubble3"></div>
+            <div class="bubble bubble4"></div>
+            <div class="bubble bubble5"></div>
+            <div class="bubble bubble6"></div>
+            <div class="bubble bubble7"></div>
+            <div class="bubble bubble8"></div>
+            <div class="coffee-wave wave1"></div>
+            <div class="coffee-wave wave2"></div>
+            <div class="coffee-wave wave3"></div>
+        </div>
 
-
-</body>
+    </body>
 
 </html>
