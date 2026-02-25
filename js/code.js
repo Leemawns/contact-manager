@@ -555,14 +555,22 @@ function doLogin() {
 	usernameError.innerHTML = "";
 	passwordError.innerHTML = "";
 
+	let isValid = true;
+
 	if (login == "")
 	{
 		usernameError.innerHTML = "Please provide a valid username."
+		isValid = false;
 	}
 
 	if (password == "")
 	{
 		passwordError.innerHTML = "Please provide a valid password."
+		isValid = false;
+	}
+
+	if (!isValid) {
+		return;
 	}
 
 	document.getElementById("loginResult").innerHTML = "";
